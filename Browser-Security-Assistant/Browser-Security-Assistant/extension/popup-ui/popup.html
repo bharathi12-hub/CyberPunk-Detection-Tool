@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CyberPunk Detection Tool</title>
+  <link rel="stylesheet" href="../shared/themes.css" />
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body data-theme="cyan" data-mode="dark">
+  <div class="container">
+    <header>
+      <img src="../icons/logo-header.png" alt="" class="logo-mark" />
+      <span class="brand">CyberPunk</span>
+    </header>
+
+    <div id="content" class="state">
+      <section class="score-panel">
+        <div class="score-ring-wrap">
+          <svg id="score-ring" class="score-ring" viewBox="0 0 120 120">
+            <circle class="ring-track" cx="60" cy="60" r="52" />
+            <circle id="ring-progress" class="ring-progress" cx="60" cy="60" r="52" />
+          </svg>
+          <div class="score-ring-label">
+            <span id="score-value">--</span>
+            <span class="score-max">/100</span>
+          </div>
+        </div>
+        <div class="score-meta">
+          <p id="classification" class="classification">Scanning…</p>
+          <p id="hostname" class="hostname">--</p>
+        </div>
+      </section>
+      <p class="score-disclaimer">The Score is only for Reference not a Guarantee.</p>
+
+      <section class="stat-grid">
+        <div class="stat-tile tile-a">
+          <span class="stat-label">HTTPS</span>
+          <span id="metric-https" class="stat-value">--</span>
+        </div>
+        <div class="stat-tile tile-b">
+          <span class="stat-label">Phishing Risk</span>
+          <span id="metric-phishing" class="stat-value">--</span>
+        </div>
+        <div class="stat-tile tile-c">
+          <span class="stat-label">Domain Age</span>
+          <span id="metric-age" class="stat-value">--</span>
+        </div>
+        <div class="stat-tile tile-d">
+          <span class="stat-label">Trackers</span>
+          <span id="metric-trackers" class="stat-value">--</span>
+        </div>
+      </section>
+
+      <section class="card">
+        <header class="card-header">
+          <span class="card-icon">⛉</span>
+          <span class="card-title">Security Headers</span>
+          <span id="metric-headers" class="card-badge">--</span>
+        </header>
+      </section>
+
+      <section class="card">
+        <header class="card-header">
+          <span class="card-icon">⊙</span>
+          <span class="card-title">Cookies Flagged</span>
+          <span id="metric-cookies" class="card-badge">--</span>
+        </header>
+      </section>
+
+      <section class="card ai-card">
+        <header class="card-header">
+          <span class="card-icon">✦</span>
+          <span class="card-title">AI Summary</span>
+        </header>
+        <p id="ai-summary-text" class="ai-summary-text">Analyzing…</p>
+      </section>
+
+      <div class="actions">
+        <button id="dashboard-btn" class="btn btn-primary">Open Dashboard</button>
+      </div>
+    </div>
+
+    <div id="error" class="state hidden">
+      <p>No scan data yet for this tab. Try reloading the page.</p>
+    </div>
+  </div>
+
+  <script src="popup.js" type="module"></script>
+</body>
+</html>
