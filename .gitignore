@@ -1,0 +1,44 @@
+# Node
+node_modules/
+
+# Logs
+logs/
+*.log
+
+# Environment
+.env
+.env.local
+
+# Database
+*.sqlite
+*.db
+
+# Redis
+dump.rdb
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Build
+dist/
+build/
+
+# npm
+package-lock.json
+
+# Coverage
+coverage/
+
+# Reports
+*.pdf
+*.docx
+*.txt
+
+# Temporary
+tmp/
+temp/
