@@ -1,0 +1,178 @@
+/* ============================================================
+   CyberPunk Detection Tool — Popup
+   Theme variables come from ../shared/themes.css
+   ============================================================ */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  width: 360px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.container { padding: 18px; position: relative; }
+
+/* ---------- Header ---------- */
+header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.logo-mark { width: 28px; height: 28px; object-fit: contain; }
+
+.brand {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  color: var(--text);
+}
+
+/* ---------- States ---------- */
+.state.hidden { display: none; }
+
+#error { padding: 48px 0; }
+#error p { text-align: center; color: var(--text-dim); font-size: 13px; }
+
+/* ---------- Score panel ---------- */
+.score-panel {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  margin-bottom: 14px;
+}
+
+.score-ring-wrap { position: relative; width: 84px; height: 84px; flex-shrink: 0; }
+.score-ring { width: 84px; height: 84px; transform: rotate(-90deg); }
+
+.ring-track { fill: none; stroke: var(--border); stroke-width: 10; }
+
+.ring-progress {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-dasharray: 327; /* 2 * PI * 52 */
+  stroke-dashoffset: 327;
+  transition: stroke-dashoffset 0.6s ease, stroke 0.3s ease;
+}
+
+.score-ring-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#score-value { font-size: 22px; font-weight: 800; line-height: 1; font-family: var(--font-mono); }
+.score-max { font-size: 10px; color: var(--text-dim); }
+
+.score-meta { min-width: 0; }
+
+.classification {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  color: var(--text-dim);
+}
+
+.hostname {
+  font-size: 12px;
+  color: var(--text-dim);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.score-disclaimer {
+  font-size: 10.5px;
+  color: var(--text-dim);
+  text-align: center;
+  margin: 6px 0 14px;
+  font-style: italic;
+  opacity: 0.85;
+}
+
+/* ---------- Stat tile grid (flat dark-card style) ---------- */
+.stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.stat-tile {
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border: 1px solid var(--border);
+  position: relative;
+}
+
+.tile-a { background: linear-gradient(160deg, var(--card-a1), var(--card-a2)); }
+.tile-b { background: linear-gradient(160deg, var(--card-b1), var(--card-b2)); }
+.tile-c { background: linear-gradient(160deg, var(--card-c1), var(--card-c2)); }
+.tile-d { background: linear-gradient(160deg, var(--card-d1), var(--card-d2)); }
+
+.stat-label { font-size: 11px; color: var(--text-dim); font-weight: 500; }
+.stat-value { font-size: 18px; font-weight: 800; font-family: var(--font-mono); color: var(--text); }
+
+/* ---------- Cards ---------- */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  margin-bottom: 10px;
+}
+
+.card-header { display: flex; align-items: center; gap: 8px; }
+.card-icon { font-size: 13px; color: var(--accent); }
+.card-title { font-size: 12px; font-weight: 600; flex: 1; }
+
+.card-badge {
+  font-size: 12px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--text);
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 2px 8px;
+}
+
+.ai-card { border-color: var(--accent); border-opacity: 0.3; }
+.ai-summary-text { font-size: 12px; line-height: 1.6; color: var(--text-dim); margin-top: 8px; }
+
+/* ---------- Actions ---------- */
+.actions { display: flex; gap: 8px; margin-top: 4px; }
+
+.btn {
+  flex: 1;
+  border: none;
+  border-radius: 9px;
+  padding: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.1s ease;
+}
+
+.btn:active { transform: scale(0.98); }
+
+.btn-primary { background: var(--accent); color: var(--accent-contrast); }
+.btn-primary:hover { opacity: 0.9; }

@@ -1,0 +1,181 @@
+/* ============================================================
+   CyberPunk Detection Tool — Settings
+   Theme variables come from ../shared/themes.css
+   ============================================================ */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.page { max-width: 640px; margin: 0 auto; padding: 32px 24px 60px; }
+
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.logo-mark { width: 34px; height: 34px; object-fit: contain; }
+.page-header h1 { font-size: 19px; font-weight: 700; }
+
+.back-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 4px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.back-btn:hover { background: var(--accent); color: var(--accent-contrast); border-color: var(--accent); }
+
+.settings-group {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px 6px;
+  margin-bottom: 18px;
+}
+
+.group-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.setting {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.setting:last-child { border-bottom: none; }
+
+.setting label { font-size: 13px; font-weight: 500; display: block; }
+.setting small { display: block; color: var(--text-dim); font-size: 11.5px; margin-top: 2px; }
+
+/* ---------- Theme swatches ---------- */
+.theme-swatches { display: flex; gap: 10px; flex-shrink: 0; }
+
+.swatch {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--swatch-color);
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.12s ease, border-color 0.12s ease;
+}
+
+.swatch:hover { transform: scale(1.1); }
+
+.swatch.active {
+  border-color: var(--text);
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--swatch-color);
+}
+
+/* ---------- Mode toggle ---------- */
+.mode-toggle {
+  display: flex;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 3px;
+  flex-shrink: 0;
+}
+
+.mode-btn {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  padding: 7px 14px;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.mode-btn.active { background: var(--accent); color: var(--accent-contrast); }
+
+/* ---------- Toggle checkboxes ---------- */
+input.toggle {
+  width: 40px;
+  height: 22px;
+  flex-shrink: 0;
+  appearance: none;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+input.toggle::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--text-dim);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+input.toggle:checked { background: var(--accent); border-color: var(--accent); }
+input.toggle:checked::before { transform: translateX(18px); background: var(--accent-contrast); }
+
+/* ---------- Select / text inputs ---------- */
+.select-input, .text-input {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  min-width: 160px;
+  flex-shrink: 0;
+}
+
+.text-input { min-width: 220px; }
+.select-input:focus, .text-input:focus { outline: none; border-color: var(--accent); }
+
+/* ---------- Danger zone ---------- */
+.danger-zone { border-color: color-mix(in srgb, var(--high) 35%, var(--border)); }
+.danger-zone .group-title { color: var(--high); }
+
+.btn { border: none; border-radius: 8px; padding: 9px 18px; font-size: 13px; font-weight: 600; cursor: pointer; }
+.btn-primary { background: var(--accent); color: var(--accent-contrast); }
+.btn-primary:hover { opacity: 0.9; }
+.btn-danger { background: transparent; border: 1px solid var(--high); color: var(--high); }
+.btn-danger:hover { background: var(--high); color: #fff; }
+
+.save-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+#status { font-size: 12px; color: var(--low); font-weight: 600; }
