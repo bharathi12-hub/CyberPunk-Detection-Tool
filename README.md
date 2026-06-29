@@ -167,23 +167,31 @@ Select extension/
 
 ### Dashboard
 
-![Dashboard](screenshots/dashboard.png)
+<img width="1896" height="1037" alt="1" src="https://github.com/user-attachments/assets/3d83842a-5c47-404b-8da7-8abcda87d239" />
+
 
 ### Popup
 
-![Popup](screenshots/popup.png)
+<img width="1918" height="1078" alt="Screenshot 2026-06-29 091852" src="https://github.com/user-attachments/assets/4a5c32ac-8da8-41ea-8cda-4d0c75af5a87" />
+
 
 ### Reports
 
-![Reports](screenshots/reports.png)
+<img width="1918" height="1021" alt="Screenshot 2026-06-29 091704" src="https://github.com/user-attachments/assets/91c45887-8d16-486b-a434-736de426a8b1" />
+
 
 ### History
 
-![History](screenshots/history.png)
+<img width="1896" height="1032" alt="2" src="https://github.com/user-attachments/assets/da7915ce-fd02-4cfd-ac6f-2f57c6b4e136" />
+
 
 ### Settings
 
-![Settings](screenshots/settings.png)
+<img width="1297" height="1027" alt="5" src="https://github.com/user-attachments/assets/269ee1ff-ef6f-482f-abbd-e92102ccb224" />
+
+<img width="1172" height="1020" alt="Screenshot 2026-06-29 091815" src="https://github.com/user-attachments/assets/3b156e22-69d4-4368-8ca7-20113f79ec5a" />
+
+
 
 ---
 
