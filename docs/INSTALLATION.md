@@ -1,4 +1,3 @@
-
 # Installation Guide
 
 ## Requirements
@@ -11,80 +10,71 @@
 
 ---
 
-## Clone Repository
+## 1. Clone
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/CyberPunk-Detection-Tool.git
+git clone https://github.com/bharathi12-hub/CyberPunk-Detection-Tool.git
+cd CyberPunk-Detection-Tool
 ```
 
 ---
 
-## Backend
+## 2. Backend
+
+Install dependencies:
 
 ```bash
 cd backend
-
 npm install
+```
 
+Configure environment variables:
+
+```bash
+cp .env.example .env
+```
+
+Then edit `.env` and set at least `DATABASE_URL` and `REDIS_URL`, plus any
+threat-intelligence / AI keys you want to enable. The full list (with links to
+where each key comes from) is documented in
+[`backend/.env.example`](../backend/.env.example).
+
+Create a PostgreSQL database (default name `cyberpunk`) and run the migrations:
+
+```bash
+npm run migrate
+```
+
+Start the API:
+
+```bash
 npm start
 ```
 
----
-
-## Database
-
-Create PostgreSQL database
-
-```
-cyberpunk
-```
-
-Configure
-
-```
-.env
-```
-
-```
-DB_HOST=
-DB_PORT=
-DB_NAME=
-DB_USER=
-DB_PASSWORD=
-```
+The backend runs on http://localhost:3000 by default.
 
 ---
 
-## Redis
+## 3. Redis
 
-```
+Make sure Redis is running and reachable at the `REDIS_URL` set in your `.env`:
+
+```bash
 redis-server
 ```
 
 ---
 
-## Chrome Extension
+## 4. Chrome Extension
 
-Open
-
-Chrome
-
-Extensions
-
-Developer Mode
-
-Load Unpacked
-
-Select
-
-extension/
+1. Open Chrome and go to `chrome://extensions`
+2. Enable **Developer Mode** (top-right toggle)
+3. Click **Load Unpacked**
+4. Select the `extension/` folder
 
 ---
 
-## Verify
+## 5. Verify
 
-Visit
-
-https://example.com
-
-CyberPunk popup should appear.
+Visit any site (for example https://example.com). The CyberPunk popup should
+appear and show a Website Risk Score.

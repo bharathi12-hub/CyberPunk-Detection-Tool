@@ -134,8 +134,7 @@ Threat Intelligence
 ### Clone
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/CyberPunk-Detection-Tool.git
-
+git clone https://github.com/bharathi12-hub/CyberPunk-Detection-Tool.git
 cd CyberPunk-Detection-Tool
 ```
 
@@ -144,8 +143,20 @@ cd CyberPunk-Detection-Tool
 ```bash
 cd backend
 npm install
+
+# Configure environment (Postgres, Redis, and optional API keys)
+cp .env.example .env
+# ...then edit .env and fill in the values
+
+# Create the database tables
+npm run migrate
+
+# Start the API on http://localhost:3000
 npm start
 ```
+
+> Requires PostgreSQL and Redis running locally (or reachable via the URLs in `.env`).
+> See [docs/INSTALLATION.md](docs/INSTALLATION.md) for full setup details.
 
 ### Extension
 
