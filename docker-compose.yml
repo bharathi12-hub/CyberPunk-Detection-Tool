@@ -1,0 +1,50 @@
+# One-command local stack: Postgres + Redis + the backend API.
+#   docker compose up --build
+# Threat-intel / AI keys are optional — pass them from your shell environment
+# (or a root .env) to enable those features.
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: cyberpunk
+      POSTGRES_PASSWORD: cyberpunk
+      POSTGRES_DB: cyberpunk
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U cyberpunk']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - '6379:6379'
+
+  api:
+    build: ./backend
+    environment:
+      DATABASE_URL: postgres://cyberpunk:cyberpunk@db:5432/cyberpunk
+      REDIS_URL: redis://redis:6379
+      PORT: 3000
+      ALLOWED_ORIGIN: '*'
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      VIRUSTOTAL_API_KEY: ${VIRUSTOTAL_API_KEY:-}
+      ABUSEIPDB_API_KEY: ${ABUSEIPDB_API_KEY:-}
+      SAFE_BROWSING_API_KEY: ${SAFE_BROWSING_API_KEY:-}
+    ports:
+      - '3000:3000'
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    # Apply the schema, then start the API.
+    command: sh -c "node postgres/migrate.js && node api/server.js"
+
+volumes:
+  pgdata:

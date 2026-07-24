@@ -28,9 +28,6 @@ Thumbs.db
 dist/
 build/
 
-# npm
-package-lock.json
-
 # Coverage
 coverage/
 

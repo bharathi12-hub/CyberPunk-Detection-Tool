@@ -12,7 +12,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-const MODEL = 'claude-sonnet-4-6';
+const MODEL = 'claude-sonnet-5';
 
 async function callClaude(systemPrompt, userContent) {
   const response = await anthropic.messages.create({

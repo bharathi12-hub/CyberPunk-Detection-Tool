@@ -50,7 +50,7 @@ app.use('/api/ai', aiRouter);
 app.use('/api/intelligence', intelligenceRouter);
 app.use('/api/analytics', analyticsRouter);
 
-app.use((err, req, res, next) => {
+app.use((err, req, res, _next) => {
   console.error(err);
   res.status(500).json({ error: 'Internal server error' });
 });

@@ -1,0 +1,20 @@
+{
+  "name": "cyberpunk-detection-tool",
+  "version": "1.0.0",
+  "description": "AI-powered browser security extension — detection engines, backend, tests, and tooling.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint .",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.0.0",
+    "eslint": "^9.0.0",
+    "globals": "^15.0.0",
+    "prettier": "^3.0.0",
+    "vitest": "^2.0.0"
+  }
+}

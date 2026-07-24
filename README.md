@@ -4,6 +4,7 @@
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Chrome Extension](https://img.shields.io/badge/Chrome-Extension-orange)
 ![Node.js](https://img.shields.io/badge/Backend-NodeJS-brightgreen)
+[![CI](https://github.com/bharathi12-hub/CyberPunk-Detection-Tool/actions/workflows/ci.yml/badge.svg)](https://github.com/bharathi12-hub/CyberPunk-Detection-Tool/actions/workflows/ci.yml)
 
 ---
 
@@ -11,7 +12,7 @@
 
 CyberPunk Detection Tool is an AI-powered browser security extension that analyzes websites in real time and generates an explainable security trust score.
 
-Unlike traditional URL reputation tools, CyberPunk combines multiple security engines including phishing detection, tracker analysis, cookie inspection, security headers, threat intelligence feeds, and machine learning–based risk analysis into a single platform.
+Unlike traditional URL reputation tools, CyberPunk combines multiple security engines including phishing detection, tracker analysis, cookie inspection, security headers, threat intelligence feeds, and a weighted heuristic risk engine into a single platform.
 
 ---
 
@@ -67,9 +68,11 @@ Redis
 ## Project Structure
 
 ```
-backend/
-extension/
-docs/
+backend/            # Node.js + Express API (PostgreSQL + Redis)
+extension/          # Chrome MV3 extension (popup, dashboard, engines)
+tests/              # Engine unit tests (Vitest)
+docs/               # Documentation (start with docs/GUIDE.md)
+docker-compose.yml  # One-command backend stack (API + Postgres + Redis)
 ```
 
 ---
@@ -158,6 +161,17 @@ npm start
 > Requires PostgreSQL and Redis running locally (or reachable via the URLs in `.env`).
 > See [docs/INSTALLATION.md](docs/INSTALLATION.md) for full setup details.
 
+### Run with Docker (quickest)
+
+Bring up the API, PostgreSQL, and Redis together:
+
+```bash
+docker compose up --build
+```
+
+The API is then available at http://localhost:3000. Threat-intel / AI keys are optional —
+export them in your shell (or a root `.env`) to enable those features.
+
 ### Extension
 
 ```
@@ -206,13 +220,34 @@ Select extension/
 
 ---
 
+## Testing
+
+Detection-engine logic is covered by unit tests (Vitest):
+
+```bash
+npm install   # root dev tooling
+npm test      # run the engine test suite
+npm run lint  # lint backend + tests
+```
+
+CI runs the tests and linter on every push via GitHub Actions.
+
+---
+
+## Security & Privacy
+
+- **Security policy:** [SECURITY.md](SECURITY.md) — the backend is intended for local / self-hosted use; restrict CORS and add auth before exposing it publicly.
+- **Privacy:** [PRIVACY.md](PRIVACY.md) — page analysis happens locally; only structured data is sent to the services you enable.
+- **Contributing:** [CONTRIBUTING.md](CONTRIBUTING.md).
+
+---
+
 ## Future Improvements
 
 - LLM-based AI explanation
 - RAG integration
 - Sandbox URL execution
 - SIEM integration
-- Docker deployment
 - Kubernetes deployment
 - Firefox Extension
 - Edge Extension

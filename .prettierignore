@@ -1,0 +1,4 @@
+node_modules
+extension/vendor
+**/*.min.js
+package-lock.json
