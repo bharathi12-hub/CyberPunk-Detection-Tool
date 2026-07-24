@@ -11,7 +11,7 @@ single Website Risk Score, explained in plain English and exportable as a full S
 ## 1. Project Structure
 
 ```
-Browser-Security-Assistant/
+CyberPunk-Detection-Tool/
 ├── extension/                  # Chrome Extension (Manifest V3) — fully self-contained
 │   ├── manifest.json
 │   ├── popup-ui/                 # Toolbar popup: score ring, stat tiles, AI summary
@@ -266,15 +266,15 @@ HaveIBeenPwned password-breach check are all free and keyless. Optional keys unl
 ### 8.1 Install dependencies
 
 ```bash
-cd Browser-Security-Assistant/backend
+cd backend
 npm install
 ```
 
 ### 8.2 Set up PostgreSQL
 
 ```bash
-psql -U postgres -c "CREATE USER bsa_user WITH PASSWORD 'bsa_password';"
-psql -U postgres -c "CREATE DATABASE browser_security_assistant OWNER bsa_user;"
+psql -U postgres -c "CREATE USER cyberpunk WITH PASSWORD 'cyberpunk';"
+psql -U postgres -c "CREATE DATABASE cyberpunk OWNER cyberpunk;"
 ```
 
 ### 8.3 Set up Redis
@@ -299,13 +299,12 @@ cp .env.example .env
 Edit `.env`:
 ```ini
 PORT=3000
-DATABASE_URL=postgresql://bsa_user:bsa_password@localhost:5432/browser_security_assistant
+DATABASE_URL=postgresql://cyberpunk:cyberpunk@localhost:5432/cyberpunk
 REDIS_URL=redis://localhost:6379
 ANTHROPIC_API_KEY=                  # optional — leave blank to use local-fallback explanations
 ABUSEIPDB_API_KEY=                  # optional — free key from https://www.abuseipdb.com/register
 SAFE_BROWSING_API_KEY=              # optional — free key via Google Cloud Console
 VIRUSTOTAL_API_KEY=                 # optional — free tier: 4 req/min, 500/day
-PHISHTANK_API_KEY=                  # optional
 ALLOWED_ORIGIN=*
 ```
 
@@ -331,7 +330,7 @@ Verify it's alive: `curl http://localhost:3000/health` → `{"status":"ok"}`
 
 1. Open `chrome://extensions`, toggle **Developer mode** on
 2. Click **Load unpacked**
-3. Select the **`Browser-Security-Assistant/extension`** folder specifically — the one that
+3. Select the **`extension/`** folder specifically — the one that
    directly contains `manifest.json`. Selecting the outer project folder will fail with
    "Manifest file is missing or unreadable."
 4. The bird-mark icon should appear in your toolbar
@@ -383,7 +382,7 @@ GET    /api/analytics/summary      aggregate threat statistics
 ### Settings that are saved but not yet behaviorally wired
 Two settings persist your preference but don't yet change behavior — flagged honestly rather than
 faked: **Auto-block known trackers** (needs a `declarativeNetRequest` rule set — see
-`docs/upgrades.md` item #1) and **Risk sensitivity** (needs `risk-engine.js` threshold tuning).
+[UPGRADES.md](UPGRADES.md) item #1) and **Risk sensitivity** (needs `risk-engine.js` threshold tuning).
 Every other setting — auto-scan, all notification toggles, history retention, default export
 format, theme, and mode — is fully wired to real behavior.
 
@@ -450,6 +449,6 @@ npm run dev           # run with auto-reload
 # No build step — plain JS/HTML/CSS loaded directly via "Load unpacked"
 ```
 
-See `docs/upgrades.md` for the detailed roadmap (tracker blocking, real SSL cert inspection,
+See [UPGRADES.md](UPGRADES.md) for the detailed roadmap (tracker blocking, real SSL cert inspection,
 password manager integration, a trained risk-scoring model, live WebSocket dashboard updates,
 and team/enterprise mode).
