@@ -12,8 +12,26 @@
  */
 
 function encodeUrlId(url) {
-  // VirusTotal v3 identifies URLs by base64 (URL-safe, no padding) of the URL string
-  return Buffer.from(url).toString('base64').replace(/=+$/, '').replace(/\+/g, '-').replace(/\//g, '_');
+  // VirusTotal v3 identifies URLs by base64 (URL-safe, no padding) of the URL string.
+  // Bounded padding match (base64 padding is 0-2 '=' chars) instead of an
+  // unbounded `+` (CodeQL: polynomial regex).
+  return Buffer.from(url).toString('base64').replace(/={1,2}$/, '').replace(/\+/g, '-').replace(/\//g, '_');
+}
+
+const VIRUSTOTAL_ORIGIN = 'https://www.virustotal.com';
+
+function vtUrl(path) {
+  // Anchor every outbound request to VirusTotal's fixed origin. `path` is
+  // built from `encodeUrlId`'s URL-safe-base64 output, which can never
+  // contain '/', ':' or other URL-structural characters — but resolving
+  // through `new URL()` and checking the resulting origin means that stays
+  // true even if that encoding were ever loosened later, instead of relying
+  // implicitly on it (CWE-918: server-side request forgery).
+  const resolved = new URL(path, VIRUSTOTAL_ORIGIN + '/api/v3/');
+  if (resolved.origin !== VIRUSTOTAL_ORIGIN) {
+    throw new Error('refusing to call unexpected origin');
+  }
+  return resolved.toString();
 }
 
 /**
@@ -30,13 +48,13 @@ export async function checkVirusTotal(url, apiKey) {
     const urlId = encodeUrlId(url);
 
     // Try reading an existing analysis first (avoids burning a submission call)
-    let response = await fetch(`https://www.virustotal.com/api/v3/urls/${urlId}`, {
+    let response = await fetch(vtUrl(`urls/${urlId}`), {
       headers: { 'x-apikey': apiKey },
     });
 
     // Not previously scanned — submit it for analysis
     if (response.status === 404) {
-      const submitRes = await fetch('https://www.virustotal.com/api/v3/urls', {
+      const submitRes = await fetch(vtUrl('urls'), {
         method: 'POST',
         headers: {
           'x-apikey': apiKey,

@@ -29,7 +29,27 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(helmet());
-app.use(cors({ origin: process.env.ALLOWED_ORIGIN || '*' }));
+
+// ALLOWED_ORIGIN (comma-separated for multiple) should be set to the
+// extension's actual origin(s). With nothing configured we deny all
+// cross-origin browser requests by default, rather than falling back to
+// '*' (CWE-942: permissive CORS configuration) — same-origin and non-browser
+// requests (curl, server-to-server) carry no Origin header and are unaffected.
+const allowedOrigins = (process.env.ALLOWED_ORIGIN || '')
+  .split(',')
+  .map((o) => o.trim())
+  .filter(Boolean);
+
+app.use(
+  cors({
+    origin(origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error('Not allowed by CORS'));
+    },
+  })
+);
 app.use(express.json({ limit: '2mb' }));
 
 // Global rate limit — generous, since most calls come from a single user's
